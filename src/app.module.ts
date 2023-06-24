@@ -15,7 +15,7 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
   catch(_exception: NotFoundException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
-    response.sendFile(join(process.cwd(), '/public/dist/index.html'));
+    response.sendFile(join(process.cwd(), '/client/dist/index.html'));
   }
 }
 

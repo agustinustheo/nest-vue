@@ -6,8 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "cd public && yarn build && cd .. && nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "build": "yarn format && cd client && yarn build && cd .. && nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" && cd client && yarn format",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
