@@ -8,26 +8,15 @@ import {
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
-import { APP_FILTER } from '@nestjs/core';
-
-@Catch(NotFoundException)
-export class NotFoundExceptionFilter implements ExceptionFilter {
-  catch(_exception: NotFoundException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse();
-    response.sendFile(join(process.cwd(), '/client/dist/index.html'));
-  }
-}
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_FILTER,
-      useClass: NotFoundExceptionFilter,
-    },
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client/dist'),
+    }),
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
